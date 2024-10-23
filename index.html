@@ -1,48 +1,11 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise and Sunset in Bangkok</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-        #sun-info {
-            margin-top: 20px;
-        }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ข้อความถึงต้า</title>
 </head>
 <body>
-
-    <h1></h1>
-    <div id="sun-info">
-        
-    </div>
-
-    <script>
-        // ดึงข้อมูลจาก API
-        fetch('https://api.sunrise-sunset.org/json?lat=13.7563&lng=100.5018&formatted=0')
-        .then(response => response.json())
-        .then(data => {
-            const sunInfo = document.getElementById('sun-info');
-            const sunrise = new Date(data.results.sunrise).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-            const sunset = new Date(data.results.sunset).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-            
-            // แสดงข้อมูลเวลาพระอาทิตย์ขึ้นและตก
-            sunInfo.innerHTML = `<p><strong>พระอาทิตย์ขึ้น:</strong> ${sunrise}</p>
-                                 <p><strong>พระอาทิตย์ตก:</strong> ${sunset}</p>`;
-        })
-        .catch(error => {
-            document.getElementById('sun-info').innerHTML = '<p>ไม่สามารถดึงข้อมูลได้</p>';
-            console.error('Error fetching data:', error);
-        });
-    </script>
-
+   สวัสดีต้า คุณได้เขียนคะแนนจาก Todolist เท่ากับ 9 เต็ม 10 วันนี้หวังว่าคุณได้ 100 คะแนน
 </body>
 </html>
