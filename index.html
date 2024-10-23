@@ -3,60 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สภาพอากาศปัจจุบัน</title>
+    <title>Sunrise and Sunset in Bangkok</title>
     <style>
         body {
-            font-family: 'Kanit', sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f2f5;
+            margin-top: 50px;
         }
-        .weather-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        h1 {
+            color: #333;
+        }
+        #sun-info {
             margin-top: 20px;
-        }
-        .temperature {
-            font-size: 48px;
-            font-weight: bold;
-            color: #1a73e8;
-        }
-        .weather-info {
-            margin: 10px 0;
-            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="weather-card">
-        <h1>สภาพอากาศปัจจุบัน</h1>
-        <div id="location">กำลังโหลด...</div>
-        <div id="weather-container">
-            <div class="temperature" id="temp">--°C</div>
-            <div class="weather-info" id="description">-</div>
-            <div class="weather-info" id="humidity">ความชื้น: --%</div>
-            <div class="weather-info" id="wind">ความเร็วลม: -- m/s</div>
-        </div>
+
+    <h1>เวลาพระอาทิตย์ขึ้นและตกในกรุงเทพฯ</h1>
+    <div id="sun-info">
+        <p>กำลังโหลดข้อมูล...</p>
     </div>
 
     <script>
-        const API_KEY = 'e442621394561260c4f124f7fd66b61f'; // ใส่ API key ของคุณจาก OpenWeatherMap
+        // ดึงข้อมูลจาก API
+        fetch('https://api.sunrise-sunset.org/json?lat=13.7563&lng=100.5018&formatted=0')
+        .then(response => response.json())
+        .then(data => {
+            const sunInfo = document.getElementById('sun-info');
+            const sunrise = new Date(data.results.sunrise).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+            const sunset = new Date(data.results.sunset).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+            
+            // แสดงข้อมูลเวลาพระอาทิตย์ขึ้นและตก
+            sunInfo.innerHTML = `<p><strong>พระอาทิตย์ขึ้น:</strong> ${sunrise}</p>
+                                 <p><strong>พระอาทิตย์ตก:</strong> ${sunset}</p>`;
+        })
+        .catch(error => {
+            document.getElementById('sun-info').innerHTML = '<p>ไม่สามารถดึงข้อมูลได้</p>';
+            console.error('Error fetching data:', error);
+        });
+    </script>
 
-        // ฟังก์ชันขอตำแหน่งปัจจุบัน
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showWeather);
-            } else {
-                alert("Geolocation ไม่รองรับในเบราว์เซอร์นี้");
-            }
-        }
-
-        // ฟังก์ชันแสดงข้อมูลสภาพอากาศ
-        async function showWeather(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=th`;
+</body>
+</html>
