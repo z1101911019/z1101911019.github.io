@@ -6,6 +6,23 @@
    <title>ข้อความถึงต้า</title>
 </head>
 <body>
-   สวัสดีต้า คุณคะแนนจาก Todolist เมื่อวานนี้ เท่ากับ 9 เต็ม 10 วันนี้หวังว่าคุณได้ 10 คะแนน
+   สวัสดีต้า คุณมี คะแนนจาก To do list เมื่อวานนี้ เท่ากับ 5 เต็ม 11  วันนี้หวังว่าคุณได้ 10 คะแนน
+   
+   <div id="message"></div>
+   
+   <script>
+      // รับค่าคะแนน
+      let score = 5; // คะแนนปัจจุบัน
+      let messageElement = document.getElementById('message');
+      
+      // ตรวจสอบเงื่อนไข
+      if (score < 5) {
+         messageElement.innerHTML = "คุณต้าครับ คะแนนยังน้อยกว่า 5 นะครับ พยายามทำให้มากขึ้นอีกหน่อยนะครับ เชื่อว่าคุณทำได้แน่นอน!";
+         messageElement.style.color = "red";
+      } else {
+         messageElement.innerHTML = "เก่งมากครับคุณต้า! คุณทำได้ดีมากแล้ว ทำได้ถึง 5 คะแนนหรือมากกว่า ยอดเยี่ยมมากครับ เก่งจริงๆ";
+         messageElement.style.color = "green";
+      }
+   </script>
 </body>
 </html>
